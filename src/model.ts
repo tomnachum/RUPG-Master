@@ -1,24 +1,16 @@
 const NUM_OF_POKEMON = 949;
 
 class Model {
-  public user: User;
+  public user: User = new User();
 
-  constructor() {
-    this.user = new User();
-    console.log("hi");
-    console.log(this.user);
-  }
-
-  public setUserData() {
-    Promise.all([
+  public async setUserData() {
+    return Promise.all([
       $.get("https://randomuser.me/api/?results=7"),
       $.get("https://api.kanye.rest"),
       $.get(`https://pokeapi.co/api/v2/pokemon/${this.getRandomId()}`),
       $.get(`https://baconipsum.com/api/?type=all-meat&paras=1`),
     ]).then((responses: any[]) => {
-      const usersData = responses[0].results;
-      const user = usersData[0];
-      const friends = usersData.slice(1);
+      const [user, ...friends] = responses[0].results;
       const pokemonData = responses[2];
       this.user = new User(
         { first: user.name.first, last: user.name.last },
