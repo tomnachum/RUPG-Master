@@ -4,7 +4,7 @@
 
   $("#generate-user").on("click", function () {
     model.setUserData().then(res => {
-      console.log(model.user);
+      console.log(model.getUser());
     });
   });
 })();

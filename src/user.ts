@@ -16,6 +16,7 @@ type Pokemon = {
 class User {
   constructor(
     public name: Name = { first: "", last: "" },
+    public img: string = "",
     public address: Address = { city: "", state: "" },
     public quote: string = "",
     public pokemon: Pokemon = { name: "", imgUrl: "" },

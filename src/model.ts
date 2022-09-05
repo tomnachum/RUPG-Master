@@ -1,7 +1,19 @@
 const NUM_OF_POKEMON = 949;
 
 class Model {
-  public user: User = new User();
+  private user: User = new User();
+
+  public getUser(): User {
+    return JSON.parse(JSON.stringify(this.user));
+  }
+
+  // Math.random -> [0,1)
+  // *NUM_OF_POKEMON -> [0,949)
+  // floor -> [0,948]
+  // +1 -> [1,949]
+  private getRandomId(): number {
+    return Math.floor(Math.random() * NUM_OF_POKEMON) + 1;
+  }
 
   public async setUserData() {
     return Promise.all([
@@ -14,26 +26,15 @@ class Model {
       const pokemonData = responses[2];
       this.user = new User(
         { first: user.name.first, last: user.name.last },
+        user.picture.large,
         { city: user.location.city, state: user.location.state },
         responses[1].quote,
         { imgUrl: pokemonData.sprites.front_default, name: pokemonData.name },
         responses[3][0],
-        friends.map((f: any) => {
+        friends.map((f: { name: { first: string; last: string } }) => {
           return { first: f.name.first, last: f.name.last };
         })
       );
     });
   }
-
-  // Math.random -> [0,1)
-  // *NUM_OF_POKEMON -> [0,949)
-  // floor -> [0,948]
-  // +1 -> [1,949]
-  private getRandomId(): number {
-    return Math.floor(Math.random() * NUM_OF_POKEMON) + 1;
-  }
 }
-
-// getPerson(): Person {
-//   return JSON.parse(JSON.stringify(this.person))
-// }

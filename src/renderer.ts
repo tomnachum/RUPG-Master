@@ -1,5 +1,3 @@
 class Renderer {
-  constructor() {}
-
-  render() {}
+  render(user: User) {}
 }
