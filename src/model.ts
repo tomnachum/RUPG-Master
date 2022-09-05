@@ -1,4 +1,5 @@
-const NUM_OF_POKEMON = 949; //TODO: 905?
+// const NUM_OF_POKEMON = 949;
+const NUM_OF_POKEMON = 900;
 
 class Model {
   private user: User = new User();
@@ -23,14 +24,18 @@ class Model {
       $.get(`https://baconipsum.com/api/?type=all-meat&paras=1`),
     ]).then((responses: any[]) => {
       const [user, ...friends] = responses[0].results;
-      const pokemonData = responses[2];
+      const pokemon = responses[2];
+      const about = responses[3][0];
       this.user = new User(
-        { first: user.name.first, last: user.name.last },
+        user.name.first,
+        user.name.last,
         user.picture.large,
-        { city: user.location.city, state: user.location.state },
+        user.location.city,
+        user.location.state,
         responses[1].quote,
-        { imgUrl: pokemonData.sprites.front_default, name: pokemonData.name },
-        responses[3][0],
+        pokemon.name,
+        pokemon.sprites.front_default,
+        about,
         friends.map((f: { name: { first: string; last: string } }) => {
           return { first: f.name.first, last: f.name.last };
         })

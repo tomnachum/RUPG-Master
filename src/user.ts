@@ -3,23 +3,16 @@ type Name = {
   last: string;
 };
 
-type Address = {
-  city: string;
-  state: string;
-};
-
-type Pokemon = {
-  name: string;
-  imgUrl: string;
-};
-
 class User {
   constructor(
-    public name: Name = { first: "", last: "" },
+    public fname: string = "",
+    public lname: string = "",
     public img: string = "",
-    public address: Address = { city: "", state: "" },
+    public city: string = "",
+    public state: string = "",
     public quote: string = "",
-    public pokemon: Pokemon = { name: "", imgUrl: "" },
+    public pokemonName: string = "",
+    public pokemonImg: string = "",
     public about: string = "",
     public friends: Name[] = []
   ) {}
