@@ -1,4 +1,4 @@
-const NUM_OF_POKEMON = 949;
+const NUM_OF_POKEMON = 949; //TODO: 905?
 
 class Model {
   private user: User = new User();

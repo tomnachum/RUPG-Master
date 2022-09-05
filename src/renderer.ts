@@ -1,3 +1,5 @@
 class Renderer {
-  render(user: User) {}
+  public render(user: User) {}
+
+  private renderFriends(friends: Name[]) {}
 }
