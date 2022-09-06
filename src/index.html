@@ -22,6 +22,31 @@
         <p>{{first}} {{last}}</p>
       {{/each}}
     </script>
+
+    <script id="user-template" type="text/x-handlebars-template">
+      <img id="profile-pic" src="{{img}}" alt="" />
+      <div class="user-info">
+        <p>{{fname}} {{lname}}</p>
+        <p>{{city}}, {{state}}</p>
+      </div>
+    </script>
+
+    <script id="quote-template" type="text/x-handlebars-template">
+      <p>Favorite quote:</p>
+      <p>"{{quote}}"</p>
+      <p>-Kanye</p>
+    </script>
+
+    <script id="pokemon-template" type="text/x-handlebars-template">
+      <img id="pokemon-image" src="{{pokemonImg}}" alt="" />
+      <p id="pokemon-text">Favorite Pokemon: {{pokemonName}}</p>
+    </script>
+
+    <script id="meat-template" type="text/x-handlebars-template">
+      <p class="meat-text"><strong>About me</strong></p>
+      <p class="meat-text">{{about}}</p>
+    </script>
+
     <div class="container">
       <div class="user-container"></div>
       <div class="quote-container"></div>
