@@ -1,4 +1,4 @@
-type Name = {
+type Friend = {
   first: string;
   last: string;
 };
@@ -14,6 +14,6 @@ class User {
     public pokemonName: string = "",
     public pokemonImg: string = "",
     public about: string = "",
-    public friends: Name[] = []
+    public friends: Friend[] = []
   ) {}
 }

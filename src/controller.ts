@@ -3,8 +3,8 @@
   const model = new Model();
 
   $("#generate-user").on("click", function () {
-    model.setUserData().then(res => {
-      console.log(model.getUser());
+    model.fetchUserData().then(res => {
+      renderer.render(model.getUser());
     });
   });
 })();
