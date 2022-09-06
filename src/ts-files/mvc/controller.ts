@@ -12,4 +12,8 @@
       );
     });
   });
+
+  Handlebars.registerHelper("proper-case", function (pokemonName: string) {
+    return pokemonName[0].toUpperCase() + pokemonName.slice(1);
+  });
 })();
