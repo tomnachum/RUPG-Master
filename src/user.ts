@@ -11,8 +11,6 @@ class User {
     public city: string = "",
     public state: string = "",
     public quote: string = "",
-    public pokemonName: string = "",
-    public pokemonImg: string = "",
     public about: string = "",
     public friends: Friend[] = []
   ) {}

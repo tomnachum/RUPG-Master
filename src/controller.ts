@@ -4,7 +4,7 @@
 
   $("#generate-user").on("click", function () {
     model.fetchUserData().then(res => {
-      renderer.render(model.getUser());
+      renderer.render(model.getUser(), model.pokemon);
     });
   });
 })();

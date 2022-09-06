@@ -1,5 +1,5 @@
 class Renderer {
-  public render(user: User) {
+  public render(user: User, pokemon: Pokemon) {
     this.renderHelper("user", {
       fname: user.fname,
       lname: user.lname,
@@ -9,8 +9,8 @@ class Renderer {
     });
     this.renderHelper("quote", { quote: user.quote });
     this.renderHelper("pokemon", {
-      pokemonName: user.pokemonName,
-      pokemonImg: user.pokemonImg,
+      pokemonName: pokemon.name,
+      pokemonImg: pokemon.img,
     });
     this.renderHelper("meat", { about: user.about });
     this.renderHelper("friends", { friends: user.friends });
