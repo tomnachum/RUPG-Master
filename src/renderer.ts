@@ -1,6 +1,5 @@
 class Renderer {
   public render(user: User) {
-    this.renderHelper("friends", { friends: user.friends });
     this.renderHelper("user", {
       fname: user.fname,
       lname: user.lname,
@@ -14,6 +13,7 @@ class Renderer {
       pokemonImg: user.pokemonImg,
     });
     this.renderHelper("meat", { about: user.about });
+    this.renderHelper("friends", { friends: user.friends });
   }
 
   private renderHelper(selector: string, data: any) {
