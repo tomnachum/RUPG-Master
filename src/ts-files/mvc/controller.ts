@@ -3,8 +3,13 @@
   const model = new Model();
 
   $("#generate-user").on("click", function () {
-    model.fetchUserData().then(res => {
-      renderer.render(model.user, model.quote, model.pokemon, model.about);
+    model.fetchData().then(res => {
+      renderer.render(
+        model.getUser(),
+        model.getQuote(),
+        model.getPokemon(),
+        model.getAbout()
+      );
     });
   });
 })();
