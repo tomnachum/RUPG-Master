@@ -11,13 +11,7 @@
 
   $("#generate-user").on("click", function () {
     model.fetchData().then(res => {
-      renderer.render(
-        model.getPersonalInfo(),
-        model.getQuote(),
-        model.getPokemon(),
-        model.getAbout(),
-        model.getFriends()
-      );
+      renderer.render(model.getUser());
       saveBtn.prop("disabled", false);
     });
   });
@@ -33,6 +27,8 @@
   });
 
   loadBtn.on("click", function () {
-    const savedUser = JSON.parse(localStorage.user || "{}");
+    const savedUser = JSON.parse(localStorage.user);
+    model.setUser(savedUser);
+    renderer.render(model.getUser());
   });
 })();

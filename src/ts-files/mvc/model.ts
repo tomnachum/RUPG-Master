@@ -9,24 +9,19 @@ class Model {
     return JSON.parse(JSON.stringify(this.user));
   }
 
-  public getPersonalInfo(): PersonalInfo {
-    console.log("in getPersonalInfo");
-    return JSON.parse(JSON.stringify(this.user.personalInfo));
-  }
-
-  public getQuote(): Quote {
-    return JSON.parse(JSON.stringify(this.user.quote));
-  }
-
-  public getPokemon(): Pokemon {
-    return JSON.parse(JSON.stringify(this.user.pokemon));
-  }
-
-  public getAbout(): About {
-    return JSON.parse(JSON.stringify(this.user.about));
-  }
-
-  public getFriends(): Friend[] {
-    return JSON.parse(JSON.stringify(this.user.friends));
+  public setUser(other: User) {
+    this.user = new User(
+      new PersonalInfo(
+        other.personalInfo.fname,
+        other.personalInfo.lname,
+        other.personalInfo.img,
+        other.personalInfo.city,
+        other.personalInfo.state
+      ),
+      new Quote(other.quote.quote),
+      new Pokemon(other.pokemon.name, other.pokemon.img),
+      new About(other.about.about),
+      other.friends.map(f => new Friend(f.first, f.last))
+    );
   }
 }

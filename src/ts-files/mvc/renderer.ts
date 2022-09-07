@@ -1,16 +1,10 @@
 class Renderer {
-  public render(
-    personalInfo: PersonalInfo,
-    quote: Quote,
-    pokemon: Pokemon,
-    about: About,
-    friends: Friend[]
-  ) {
-    this.renderUser(personalInfo);
-    this.renderQuote(quote);
-    this.renderPokemon(pokemon);
-    this.renderAbout(about);
-    this.renderFriends(friends);
+  public render(user: User) {
+    this.renderPersonalInfo(user.personalInfo);
+    this.renderQuote(user.quote);
+    this.renderPokemon(user.pokemon);
+    this.renderAbout(user.about);
+    this.renderFriends(user.friends);
   }
 
   private renderHelper(selector: string, data: any) {
@@ -21,7 +15,7 @@ class Renderer {
     $(`.${selector}-container`).append(newHTML);
   }
 
-  private renderUser(personalInfo: PersonalInfo) {
+  private renderPersonalInfo(personalInfo: PersonalInfo) {
     this.renderHelper("user", {
       fname: personalInfo.fname,
       lname: personalInfo.lname,
