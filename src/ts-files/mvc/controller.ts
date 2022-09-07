@@ -1,9 +1,14 @@
 (function () {
+  const UP = "&#9650;";
+  const DOWN = "&#9660;";
+
   const renderer = new Renderer();
   const model = new Model();
 
   const saveBtn = $("#save-user");
   const loadBtn = $("#load-user");
+  const dropdown = $("#myDropdown");
+
   saveBtn.prop("disabled", true);
   if (Object.keys(JSON.parse(localStorage.user || "{}")).length === 0) {
     loadBtn.prop("disabled", true);
@@ -30,10 +35,12 @@
     const savedUser = JSON.parse(localStorage.user);
     model.setUser(savedUser);
     renderer.render(model.getUser());
-    $("#myDropdown").toggleClass("show");
+    dropdown.toggleClass("show");
+    loadBtn.html(`Load User Page ${dropdown.hasClass("show") ? DOWN : UP}`);
   });
 
-  $("#myDropdown").on("click", function () {
+  dropdown.on("click", function () {
     $(this).toggleClass("show");
+    loadBtn.html(`Load User Page ${UP}`);
   });
 })();
