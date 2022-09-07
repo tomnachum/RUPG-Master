@@ -5,10 +5,11 @@
   $("#generate-user").on("click", function () {
     model.fetchData().then(res => {
       renderer.render(
-        model.getUser(),
+        model.getPersonalInfo(),
         model.getQuote(),
         model.getPokemon(),
-        model.getAbout()
+        model.getAbout(),
+        model.getFriends()
       );
     });
   });

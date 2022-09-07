@@ -1,22 +1,25 @@
 class User {
   constructor(
-    public fname: string = "",
-    public lname: string = "",
-    public img: string = "",
-    public city: string = "",
-    public state: string = "",
+    public personalInfo: PersonalInfo = new PersonalInfo(),
+    public quote: Quote = new Quote(),
+    public pokemon: Pokemon = new Pokemon(),
+    public about: About = new About(),
     public friends: Friend[] = []
   ) {}
 
   async getData() {
-    const users = await $.get("https://randomuser.me/api/?results=8");
-    const [user, ...friends] = users.results;
-    this.fname = user.name.first;
-    this.lname = user.name.last;
-    this.img = user.picture.large;
-    this.city = user.location.city;
-    this.state = user.location.state;
-    this.friends = friends.map((f: any) => {
+    await Promise.all([
+      this.personalInfo.getData(),
+      this.quote.getData(),
+      this.pokemon.getData(),
+      this.about.getData(),
+      this.getFriendsData(),
+    ]);
+  }
+
+  async getFriendsData() {
+    const friends = await $.get("https://randomuser.me/api/?results=7");
+    this.friends = friends.results.map((f: any) => {
       return new Friend(f.name.first, f.name.last);
     });
   }

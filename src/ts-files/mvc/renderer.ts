@@ -1,10 +1,16 @@
 class Renderer {
-  public render(user: User, quote: Quote, pokemon: Pokemon, about: About) {
-    this.renderUser(user);
+  public render(
+    personalInfo: PersonalInfo,
+    quote: Quote,
+    pokemon: Pokemon,
+    about: About,
+    friends: Friend[]
+  ) {
+    this.renderUser(personalInfo);
     this.renderQuote(quote);
     this.renderPokemon(pokemon);
     this.renderAbout(about);
-    this.renderFriends(user.friends);
+    this.renderFriends(friends);
   }
 
   private renderHelper(selector: string, data: any) {
@@ -15,13 +21,13 @@ class Renderer {
     $(`.${selector}-container`).append(newHTML);
   }
 
-  private renderUser(user: User) {
+  private renderUser(personalInfo: PersonalInfo) {
     this.renderHelper("user", {
-      fname: user.fname,
-      lname: user.lname,
-      city: user.city,
-      state: user.state,
-      img: user.img,
+      fname: personalInfo.fname,
+      lname: personalInfo.lname,
+      city: personalInfo.city,
+      state: personalInfo.state,
+      img: personalInfo.img,
     });
   }
 

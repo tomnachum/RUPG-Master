@@ -1,33 +1,27 @@
 class Model {
-  constructor(
-    private user: User = new User(),
-    private pokemon: Pokemon = new Pokemon(),
-    private quote: Quote = new Quote(),
-    private about: About = new About()
-  ) {}
+  constructor(private user: User = new User()) {}
 
-  public getUser(): User {
-    return JSON.parse(JSON.stringify(this.user));
+  public async fetchData() {
+    await this.user.getData();
   }
 
-  public getPokemon(): Pokemon {
-    return JSON.parse(JSON.stringify(this.pokemon));
+  public getPersonalInfo(): PersonalInfo {
+    return JSON.parse(JSON.stringify(this.user.personalInfo));
   }
 
   public getQuote(): Quote {
-    return JSON.parse(JSON.stringify(this.quote));
+    return JSON.parse(JSON.stringify(this.user.quote));
+  }
+
+  public getPokemon(): Pokemon {
+    return JSON.parse(JSON.stringify(this.user.pokemon));
   }
 
   public getAbout(): About {
-    return JSON.parse(JSON.stringify(this.about));
+    return JSON.parse(JSON.stringify(this.user.about));
   }
 
-  public async fetchData() {
-    await Promise.all([
-      this.user.getData(),
-      this.quote.getData(),
-      this.pokemon.getData(),
-      this.about.getData(),
-    ]);
+  public getFriends(): Friend[] {
+    return JSON.parse(JSON.stringify(this.user.friends));
   }
 }
