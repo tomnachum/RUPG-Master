@@ -7,10 +7,14 @@
 
   const saveBtn = $("#save-user");
   const loadBtn = $("#load-user");
-  const dropdown = $("#myDropdown");
+  const dropdown = $(".saved-users-container");
 
   saveBtn.prop("disabled", true);
-  if (Object.keys(JSON.parse(localStorage.user || "{}")).length === 0) {
+
+  const users = JSON.parse(localStorage.users || "{}");
+  let savedUsersCounter = Object.keys(users).length;
+  if (savedUsersCounter === 0) {
+    localStorage.users = JSON.stringify({});
     loadBtn.prop("disabled", true);
   }
 
@@ -26,15 +30,26 @@
   });
 
   saveBtn.on("click", function () {
-    localStorage.user = JSON.stringify(model.getUser());
-    alert("User saved successfully!");
+    let currentUsers = JSON.parse(localStorage.users);
+    currentUsers[savedUsersCounter] = model.getUser();
+    savedUsersCounter += 1;
+    localStorage.users = JSON.stringify(currentUsers);
     loadBtn.prop("disabled", false);
+    saveBtn.prop("disabled", true);
+    alert("User saved successfully!");
   });
 
   loadBtn.on("click", function () {
-    const savedUser = JSON.parse(localStorage.user);
-    model.setUser(savedUser);
-    renderer.render(model.getUser());
+    let currentUsers = JSON.parse(localStorage.users);
+    renderer.renderSavedUsers(
+      Object.entries(currentUsers).map((u: any) => {
+        return {
+          key: u[0],
+          fname: u[1].personalInfo.fname,
+          lname: u[1].personalInfo.lname,
+        };
+      })
+    );
     dropdown.toggleClass("show");
     loadBtn.html(`Load User Page ${dropdown.hasClass("show") ? DOWN : UP}`);
   });
@@ -42,5 +57,12 @@
   dropdown.on("click", function () {
     $(this).toggleClass("show");
     loadBtn.html(`Load User Page ${UP}`);
+  });
+
+  dropdown.on("click", "a", function () {
+    const index = $(this).data().idx;
+    let currentUsers = JSON.parse(localStorage.users);
+    model.setUser(currentUsers[index]);
+    renderer.render(model.getUser());
   });
 })();

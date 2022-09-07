@@ -27,8 +27,8 @@
 
     <script id="quote-template" type="text/x-handlebars-template">
       <p>Favorite quote:</p>
-      <h4>"{{quote}}"</h4>
-      <p>-Kanye</p>
+      <div>"{{quote}}"</div>
+      <div>-Kanye</div>
     </script>
 
     <script id="pokemon-template" type="text/x-handlebars-template">
@@ -49,6 +49,12 @@
       {{/each}}
     </script>
 
+    <script id="saved-users-template" type="text/x-handlebars-template">
+      {{#each users}}
+        <a data-idx="{{key}}">{{fname}} {{lname}}</a>
+      {{/each}}
+    </script>
+
     <div class="container">
       <div class="user-container"></div>
       <div class="quote-container"></div>
@@ -65,11 +71,7 @@
         <button id="save-user">Save User Page</button>
         <div class="dropdown">
           <button id="load-user">Load User Page &#9650;</button>
-          <div id="myDropdown" class="dropdown-content">
-            <a href="#">Link 1</a>
-            <a href="#">Link 2</a>
-            <a href="#">Link 3</a>
-          </div>
+          <div class="saved-users-container"></div>
         </div>
       </div>
     </div>
