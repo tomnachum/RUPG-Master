@@ -30,5 +30,10 @@
     const savedUser = JSON.parse(localStorage.user);
     model.setUser(savedUser);
     renderer.render(model.getUser());
+    $("#myDropdown").toggleClass("show");
+  });
+
+  $("#myDropdown").on("click", function () {
+    $(this).toggleClass("show");
   });
 })();
