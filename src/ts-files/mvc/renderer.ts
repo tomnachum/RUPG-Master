@@ -44,7 +44,9 @@ class Renderer {
     this.renderHelper("friends", { friends: friends });
   }
 
-  public renderSavedUsers(users: { fname: string; lname: string }[]) {
+  public renderSavedUsers(
+    users: { index: string; fname: string; lname: string }[]
+  ) {
     this.renderHelper("saved-users", { users });
   }
 }

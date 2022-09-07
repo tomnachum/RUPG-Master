@@ -44,7 +44,7 @@
     renderer.renderSavedUsers(
       Object.entries(currentUsers).map((u: any) => {
         return {
-          key: u[0],
+          index: u[0],
           fname: u[1].personalInfo.fname,
           lname: u[1].personalInfo.lname,
         };
