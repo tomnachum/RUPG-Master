@@ -5,7 +5,12 @@ class Model {
     await this.user.getData();
   }
 
+  public getUser(): User {
+    return JSON.parse(JSON.stringify(this.user));
+  }
+
   public getPersonalInfo(): PersonalInfo {
+    console.log("in getPersonalInfo");
     return JSON.parse(JSON.stringify(this.user.personalInfo));
   }
 
