@@ -16,10 +16,15 @@
   }
 
   $("#generate-user").on("click", function () {
-    model.fetchData().then(res => {
-      renderer.render(model.getUser());
-      saveBtn.prop("disabled", false);
-    });
+    model
+      .fetchData()
+      .then(res => {
+        renderer.render(model.getUser());
+        saveBtn.prop("disabled", false);
+      })
+      .catch(error => {
+        alert("Oops, there was an error, please try again.");
+      });
   });
 
   Handlebars.registerHelper("proper-case", function (pokemonName: string) {
