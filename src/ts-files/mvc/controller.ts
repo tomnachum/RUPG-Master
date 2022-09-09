@@ -11,10 +11,7 @@
 
   saveBtn.prop("disabled", true);
 
-  const users = JSON.parse(localStorage.users || "{}");
-  let savedUsersCounter = Object.keys(users).length;
-  if (savedUsersCounter === 0) {
-    localStorage.users = JSON.stringify({});
+  if (model.getUsersCounter() === 0) {
     loadBtn.prop("disabled", true);
   }
 
@@ -30,17 +27,14 @@
   });
 
   saveBtn.on("click", function () {
-    let currentUsers = JSON.parse(localStorage.users);
-    currentUsers[savedUsersCounter] = model.getUser();
-    savedUsersCounter += 1;
-    localStorage.users = JSON.stringify(currentUsers);
+    model.addUserToLS();
     loadBtn.prop("disabled", false);
     saveBtn.prop("disabled", true);
     alert("User saved successfully!");
   });
 
   loadBtn.on("click", function () {
-    let currentUsers = JSON.parse(localStorage.users);
+    let currentUsers = model.getUsersFromLS();
     renderer.renderSavedUsers(
       Object.entries(currentUsers).map((u: any) => {
         return {
@@ -54,15 +48,13 @@
     loadBtn.html(`Load User Page ${dropdown.hasClass("show") ? DOWN : UP}`);
   });
 
-  dropdown.on("click", function () {
-    $(this).toggleClass("show");
-    loadBtn.html(`Load User Page ${UP}`);
-  });
-
   dropdown.on("click", "a", function () {
+    dropdown.toggleClass("show");
+    loadBtn.html(`Load User Page ${UP}`);
+    const currentUsers = model.getUsersFromLS();
     const index = $(this).data().idx;
-    let currentUsers = JSON.parse(localStorage.users);
     model.setUser(currentUsers[index]);
     renderer.render(model.getUser());
+    saveBtn.prop("disabled", true);
   });
 })();

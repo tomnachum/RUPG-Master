@@ -1,5 +1,8 @@
 class Model {
-  constructor(private user: User = new User()) {}
+  usersCounterLS: number;
+  constructor(private user: User = new User()) {
+    this.usersCounterLS = this.initUsersOnLS();
+  }
 
   public async fetchData() {
     await this.user.getData();
@@ -23,5 +26,29 @@ class Model {
       new About(other.about.about),
       other.friends.map(f => new Friend(f.first, f.last))
     );
+  }
+
+  public getUsersCounter() {
+    return this.usersCounterLS;
+  }
+
+  private initUsersOnLS() {
+    const users = JSON.parse(localStorage.users || "{}");
+    const savedUsersCounter = Object.keys(users).length;
+    if (savedUsersCounter === 0) {
+      localStorage.users = JSON.stringify({});
+    }
+    return savedUsersCounter;
+  }
+
+  public getUsersFromLS() {
+    return JSON.parse(localStorage.users);
+  }
+
+  public addUserToLS() {
+    let currentUsers = this.getUsersFromLS();
+    currentUsers[this.usersCounterLS] = this.user;
+    localStorage.users = JSON.stringify(currentUsers);
+    this.usersCounterLS += 1;
   }
 }
