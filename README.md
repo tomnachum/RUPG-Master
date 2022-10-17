@@ -2,7 +2,7 @@
 
 ## Introduction
 
-In this project, we used external API's to generate a page of a random user.
+In this client-side project, we used external API's to generate a page of a random user.
 
 ![Alt text](/images/generate_button.png?raw=true "Optional Title")
 
